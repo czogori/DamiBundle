@@ -8,18 +8,15 @@ use Symfony\Component\Console\Command\Command,
     Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-
-
-use Dami\Cli\Command\StatusCommand as DamiStatusCommand;
 use Czogori\DamiBundle\Helper\PreparationMigrationDirectory;
 
 abstract class AbstractCommand extends ContainerAwareCommand
 {
-	protected function prepareMigrationDirectory()
-	{
-		$kernel = $this->getContainer()->get('kernel');
+    protected function prepareMigrationDirectory()
+    {
+        $kernel = $this->getContainer()->get('kernel');
 
         $preparationMigrationDirectory = new PreparationMigrationDirectory($kernel->getCacheDir(), $kernel->getBundles());
         $preparationMigrationDirectory->prepare();
-	}
+    }
 }

@@ -13,7 +13,7 @@ class CzogoriDamiBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        
+
         // TODO Move connection config to bundle config file
         $config = array();
         $config['adapter'] = 'pgsql';
@@ -23,13 +23,12 @@ class CzogoriDamiBundle extends Bundle
         $config['password'] = '';
         $config['port'] = 5432;
 
-		$rentgenExtension = new RentgenExtension($config);
+        $rentgenExtension = new RentgenExtension($config);
         $container->registerExtension($rentgenExtension);
-        $container->loadFromExtension($rentgenExtension->getAlias());        
+        $container->loadFromExtension($rentgenExtension->getAlias());
 
-        $damiExtension = new DamiExtension();        
+        $damiExtension = new DamiExtension();
         $container->registerExtension($damiExtension);
-        $container->loadFromExtension($damiExtension->getAlias());        
+        $container->loadFromExtension($damiExtension->getAlias());
     }
 }
-

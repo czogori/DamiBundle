@@ -11,20 +11,20 @@ use Dami\Migration;
 
 class RollbackCommand extends AbstractCommand
 {
-	protected function configure()
-    {    	
+    protected function configure()
+    {
         $this
-            ->setName('dami:rollback')  
+            ->setName('dami:rollback')
             ->setDescription('Rollback migrations.')
             ->addArgument('to-version', InputArgument::OPTIONAL, 'Rollback to specific version of migrations');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
-    {    	    	 
+    {
         $this->prepareMigrationDirectory();
-                 
+
         $migration = new Migration($this->getContainer());
-    	$damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
-    	$damiStatusCommand->execute($input, $output);
+        $damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
+        $damiStatusCommand->execute($input, $output);
     }
 }

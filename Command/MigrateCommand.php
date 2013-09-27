@@ -10,19 +10,19 @@ use Dami\Migration;
 
 class MigrateCommand extends AbstractCommand
 {
-	protected function configure()
-    {    	
+    protected function configure()
+    {
         $this
-            ->setName('dami:migrate')  
+            ->setName('dami:migrate')
             ->setDescription('Migrate database.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
-    {    	    	          
+    {
         $this->prepareMigrationDirectory();
-        
+
         $migration = new Migration($this->getContainer());
-    	$damiStatusCommand = new DamiMigrateCommand($this->getName(), $migration);
-    	$damiStatusCommand->execute($input, $output);
+        $damiStatusCommand = new DamiMigrateCommand($this->getName(), $migration);
+        $damiStatusCommand->execute($input, $output);
     }
 }
