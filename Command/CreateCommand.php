@@ -2,16 +2,13 @@
 
 namespace Czogori\DamiBundle\Command;
 
-use Symfony\Component\Console\Command\Command,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputOption,
+use Symfony\Component\Console\Input\InputArgument,    
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use Dami\Cli\Command\CreateCommand as DamiCreateCommand;
 
-class CreateCommand extends ContainerAwareCommand
+class CreateCommand extends AbstractCommand
 {
 	protected function configure()
     {    	
@@ -24,7 +21,9 @@ class CreateCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
-    {    	    	          
+    {    	  
+        $this->prepareMigrationDirectory();  	          
+
     	$damiStatusCommand = new DamiCreateCommand($this->getName(), $this->getContainer());
     	$damiStatusCommand->execute($input, $output);
     }

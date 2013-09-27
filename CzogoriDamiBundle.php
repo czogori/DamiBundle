@@ -13,7 +13,7 @@ class CzogoriDamiBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-
+        
         // TODO Move connection config to bundle config file
         $config = array();
         $config['adapter'] = 'pgsql';

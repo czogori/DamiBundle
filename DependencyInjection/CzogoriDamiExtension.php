@@ -18,6 +18,6 @@ class CzogoriDamiExtension extends Extension
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
-    {            	
+    {             	
     }
 }

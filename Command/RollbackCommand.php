@@ -2,17 +2,14 @@
 
 namespace Czogori\DamiBundle\Command;
 
-use Symfony\Component\Console\Command\Command,
-    Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputOption,
+use Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use Dami\Cli\Command\RollbackCommand as DamiRollbackCommand;
 use Dami\Migration;
 
-class RollbackCommand extends ContainerAwareCommand
+class RollbackCommand extends AbstractCommand
 {
 	protected function configure()
     {    	
@@ -23,7 +20,9 @@ class RollbackCommand extends ContainerAwareCommand
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
-    {    	    	          
+    {    	    	 
+        $this->prepareMigrationDirectory();
+                 
         $migration = new Migration($this->getContainer());
     	$damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
     	$damiStatusCommand->execute($input, $output);
