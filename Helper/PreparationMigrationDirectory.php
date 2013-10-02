@@ -11,6 +11,12 @@ class PreparationMigrationDirectory
     private $baseDirectory;
     private $bundles;
 
+    /**
+     * Constructor
+     * 
+     * @param string                                                 $baseDirectory Base directory for migrations.
+     * @param Symfony\Component\HttpKernel\Bundle\BundleInterface[]  $bundles       Array of BunleInterface instances.
+     */
     public function __construct($baseDirectory, $bundles)
     {
         $this->baseDirectory = $baseDirectory;
@@ -18,10 +24,18 @@ class PreparationMigrationDirectory
         $this->fileSystem = new Filesystem();
     }
 
+    /**
+     * Prepare migration directory to use.
+     * @return void
+     */
     public function prepare()
     {
         $migrationDirectory = $this->getDirectory();
-        $this->createDirectory($migrationDirectory);
+        try {
+            $this->fileSystem->mkdir($migrationDirectory);
+        } catch (IOException $e) {
+            echo 'Nie można utworzyć katalogu ' . $migrationDirectory;
+        }
 
         foreach ($this->bundles as $bundle) {
             $bundleMigrationDirectory = $bundle->getPath() . '/Resources/migrations';
@@ -35,15 +49,11 @@ class PreparationMigrationDirectory
         }
     }
 
-    private function createDirectory($migrationDirectory)
-    {
-        try {
-            $this->fileSystem->mkdir($migrationDirectory);
-        } catch (IOException $e) {
-            echo 'Nie można utworzyć katalogu ' . $migrationDirectory;
-        }
-    }
-
+    /**
+     * Get migrations directory.
+     * 
+     * @return string Migrations directory.
+     */
     private function getDirectory()
     {
         return $this->baseDirectory . '/migrations/';
