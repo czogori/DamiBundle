@@ -1,0 +1,16 @@
+{
+    "name": "czogori/dami-bundle",
+    "description": "Dami bundle",
+    "keywords": [ "dami" ],
+    "license": "MIT",    
+    "require": {        
+        "czogori/dami": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Arek Jaskólski",
+            "email": "arek.jaskolski@gmail.com"
+        }
+    ],    
+    "minimum-stability": "dev"    
+}
