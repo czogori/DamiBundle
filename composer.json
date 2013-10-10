@@ -12,5 +12,10 @@
             "email": "arek.jaskolski@gmail.com"
         }
     ],    
+    "autoload": {
+        "psr-0": {
+            "Czogori\\DamiBundle": ""
+        }
+    },
     "minimum-stability": "dev"    
 }
