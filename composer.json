@@ -3,6 +3,7 @@
     "description": "Dami bundle",
     "keywords": [ "dami" ],
     "license": "MIT",    
+    "type": "symfony-bundle",
     "require": {        
         "czogori/dami": "dev-master"
     },
