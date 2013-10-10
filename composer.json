@@ -18,5 +18,6 @@
             "Czogori\\DamiBundle": ""
         }
     },
+    "target-dir": "Czogori/DamiBundle",
     "minimum-stability": "dev"    
 }
