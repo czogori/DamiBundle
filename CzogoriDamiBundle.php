@@ -21,8 +21,6 @@ class CzogoriDamiBundle extends Bundle
  
         $damiExtension = new DamiExtension();
         $container->registerExtension($damiExtension);
-        $container->loadFromExtension($damiExtension->getAlias());
- 
-        $container->addCompilerPass(new ConnectionConfigurationPass());
+        $container->loadFromExtension($damiExtension->getAlias());        
     }
 }
