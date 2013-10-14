@@ -24,16 +24,18 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
      * {@inheritDoc}
      */
     public function prepend(ContainerBuilder $container)
-	{		
- 		$configs = $container->getExtensionConfig('propel'); 		
- 		if(isset($configs[0]['dbal'])) {
- 			$dbal = $configs[0]['dbal'];
-
-	 		$config['adapter'] = $dbal['driver'];
-	 		$config['username'] = $dbal['user'];
-	 		$config['password'] = $dbal['password'];
-	 		$config['dsn'] = $dbal['dsn'];
-	        $container->prependExtensionConfig('rentgen', $config);
-	    }
-	}
+    { 
+        $configs = $container->getExtensionConfig('propel');  
+        foreach ($configs as $config) {
+            if(isset($config['dbal'])) {
+                $dbal = $config['dbal'];
+ 
+                $connectionConfig['adapter'] = $dbal['driver'];
+                $connectionConfig['username'] = $dbal['user'];
+                $connectionConfig['password'] = $dbal['password'];
+                $connectionConfig['dsn'] = $dbal['dsn'];
+                $container->prependExtensionConfig('rentgen', $connectionConfig);                
+            }
+        }  
+    }
 }
