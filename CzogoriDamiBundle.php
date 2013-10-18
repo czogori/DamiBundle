@@ -5,7 +5,7 @@ namespace Czogori\DamiBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-use Dami\DamiExtension;
+use Dami\DependencyInjection\DamiExtension;
 use Rentgen\DependencyInjection\RentgenExtension;
 use Czogori\DamiBundle\DependencyInjection\Compiler\ConnectionConfigurationPass;
 
