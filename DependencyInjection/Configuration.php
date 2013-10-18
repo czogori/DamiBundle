@@ -19,7 +19,13 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('czogori_dami');
-
+        $rootNode
+            ->children()            
+                ->scalarNode('migrations_directory')
+                    ->defaultValue('%kernel.cache_dir%/migrations')
+                ->end()
+            ->end()
+        ;
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

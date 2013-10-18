@@ -17,7 +17,11 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
-    {    
+    {
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);        
+
+        $container->setParameter('migrations_directory', $config['migrations_directory']);
     }
 
     /**
@@ -36,6 +40,9 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
                 $connectionConfig['dsn'] = $dbal['dsn'];
                 $container->prependExtensionConfig('rentgen', $connectionConfig);                
             }
-        }  
+        }
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, array());                
+        $container->prependExtensionConfig('dami', array('migrations_directory' => $config['migrations_directory'])); 
     }
 }
