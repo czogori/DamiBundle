@@ -30,7 +30,7 @@ class PreparationMigrationDirectory
      */
     public function prepare()
     {
-        $migrationDirectory = $this->getDirectory();
+        $migrationDirectory = $this->baseDirectory;
         try {
             $this->fileSystem->mkdir($migrationDirectory);
         } catch (IOException $e) {
@@ -47,15 +47,5 @@ class PreparationMigrationDirectory
                 }
             }
         }
-    }
-
-    /**
-     * Get migrations directory.
-     * 
-     * @return string Migrations directory.
-     */
-    private function getDirectory()
-    {
-        return $this->baseDirectory . '/migrations/';
     }
 }
