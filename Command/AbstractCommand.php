@@ -15,8 +15,9 @@ abstract class AbstractCommand extends ContainerAwareCommand
     protected function prepareMigrationDirectory()
     {
         $kernel = $this->getContainer()->get('kernel');
+        $migrationsDirectory = $this->getContainer()->getParameter('migrations_directory');
 
-        $preparationMigrationDirectory = new PreparationMigrationDirectory($kernel->getCacheDir(), $kernel->getBundles());
+        $preparationMigrationDirectory = new PreparationMigrationDirectory($migrationsDirectory, $kernel->getBundles());
         $preparationMigrationDirectory->prepare();
     }
 }
