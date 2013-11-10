@@ -3,7 +3,6 @@
 namespace Czogori\DamiBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
@@ -19,7 +18,7 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);        
+        $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('migrations_directory', $config['migrations_directory']);
     }
@@ -28,21 +27,21 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
      * {@inheritDoc}
      */
     public function prepend(ContainerBuilder $container)
-    { 
-        $configs = $container->getExtensionConfig('propel');  
+    {
+        $configs = $container->getExtensionConfig('propel');
         foreach ($configs as $config) {
-            if(isset($config['dbal'])) {
+            if (isset($config['dbal'])) {
                 $dbal = $config['dbal'];
- 
+
                 $connectionConfig['adapter'] = $dbal['driver'];
                 $connectionConfig['username'] = $dbal['user'];
                 $connectionConfig['password'] = $dbal['password'];
                 $connectionConfig['dsn'] = $dbal['dsn'];
-                $container->prependExtensionConfig('rentgen', $connectionConfig);                
+                $container->prependExtensionConfig('rentgen', $connectionConfig);
             }
         }
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, array());                
-        $container->prependExtensionConfig('dami', array('migrations_directory' => $config['migrations_directory'])); 
+        $config = $this->processConfiguration($configuration, array());
+        $container->prependExtensionConfig('dami', array('migrations_directory' => $config['migrations_directory']));
     }
 }

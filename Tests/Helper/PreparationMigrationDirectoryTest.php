@@ -9,7 +9,7 @@ use Czogori\DamiBundle\Helper\PreparationMigrationDirectory;
  * @author Arek Jaskólski <arek.jaskolski@gmail.com>
  */
 class PreparationMigrationDirectoryTest extends \PHPUnit_Framework_TestCase
-{    
+{
     public function setUp()
     {
         $this->bundleDirectory = '/tmp/FooBundle';
@@ -19,19 +19,19 @@ class PreparationMigrationDirectoryTest extends \PHPUnit_Framework_TestCase
             $migrationsDirectoryInBundle . '/2.php',
         );
 
-        $this->fileSystem = new Filesystem();        
-        $this->fileSystem->mkdir($migrationsDirectoryInBundle);        
-        $this->fileSystem->touch($this->migrationFiles);                
+        $this->fileSystem = new Filesystem();
+        $this->fileSystem->mkdir($migrationsDirectoryInBundle);
+        $this->fileSystem->touch($this->migrationFiles);
     }
 
     public function tearDown()
-    {        
+    {
         $this->fileSystem->remove('/tmp/FooBundle');
         $this->fileSystem->remove('/tmp/FooBundleTest');
     }
 
     public function test_prepare()
-    {    
+    {
         $baseDirectory = '/tmp/FooBundleTest';
         $bundle = $this->getMock('Symfony\Component\HttpKernel\Bundle\BundleInterface');
         $bundle
@@ -43,5 +43,5 @@ class PreparationMigrationDirectoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->fileSystem->exists($this->migrationFiles[0]));
         $this->assertTrue($this->fileSystem->exists($this->migrationFiles[1]));
-    } 
+    }
 }

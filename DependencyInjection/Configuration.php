@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('czogori_dami');
         $rootNode
-            ->children()            
+            ->children()
                 ->scalarNode('migrations_directory')
                     ->defaultValue('%kernel.cache_dir%/migrations')
                 ->end()

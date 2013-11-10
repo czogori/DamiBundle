@@ -13,9 +13,9 @@ class PreparationMigrationDirectory
 
     /**
      * Constructor
-     * 
-     * @param string                                                 $baseDirectory Base directory for migrations.
-     * @param Symfony\Component\HttpKernel\Bundle\BundleInterface[]  $bundles       Array of BunleInterface instances.
+     *
+     * @param string                                                $baseDirectory Base directory for migrations.
+     * @param Symfony\Component\HttpKernel\Bundle\BundleInterface[] $bundles       Array of BunleInterface instances.
      */
     public function __construct($baseDirectory, $bundles)
     {
