@@ -31,8 +31,6 @@ class CreateCommand extends AbstractCommand
         $kernel = $this->getContainer()->get('kernel');
         foreach ($kernel->getBundles() as $bundle) {
             if ($bundle->getName() === $bundleName) {
-                echo $bundle->getName();
-
                 $bundleMigrationDirectory = $bundle->getPath() . '/Resources/migrations';
                 if (file_exists($bundleMigrationDirectory)) {
                     $filenameBuilder = new FileNameBuilder($migrationName);
