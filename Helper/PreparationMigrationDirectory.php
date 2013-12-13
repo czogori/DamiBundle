@@ -43,7 +43,7 @@ class PreparationMigrationDirectory
                 $finder = new Finder();
                 $finder->files('*.php')->in($bundleMigrationDirectory);
                 foreach ($finder as $file) {
-                   $this->fileSystem->copy($file->getRealpath(), $migrationDirectory . $file->getFilename(), true);
+                   $this->fileSystem->copy($file->getRealpath(), $migrationDirectory . '/' . $file->getFilename(), true);
                 }
             }
         }
