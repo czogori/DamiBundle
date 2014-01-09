@@ -7,10 +7,12 @@ use Symfony\Component\Console\Input\InputArgument,
     Symfony\Component\Console\Output\OutputInterface;
 
 use Dami\Cli\Command\RollbackCommand as DamiRollbackCommand;
-use Dami\Migration;
 
 class RollbackCommand extends AbstractCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -19,11 +21,14 @@ class RollbackCommand extends AbstractCommand
             ->addArgument('to-version', InputArgument::OPTIONAL, 'Rollback to specific version of migrations');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->prepareMigrationDirectory();
 
-        $migration = new Migration($this->getContainer());
+        $migration = $this->getContainer()->get('migration');
         $damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
         $damiStatusCommand->execute($input, $output);
     }

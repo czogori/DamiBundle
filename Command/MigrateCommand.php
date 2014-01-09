@@ -2,26 +2,33 @@
 
 namespace Czogori\DamiBundle\Command;
 
-use Symfony\Component\Console\Input\InputInterface,
+use Symfony\Component\Console\Input\InputArgument,
+    Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface;
 
 use Dami\Cli\Command\MigrateCommand as DamiMigrateCommand;
-use Dami\Migration;
 
 class MigrateCommand extends AbstractCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
             ->setName('dami:migrate')
-            ->setDescription('Migrate database.');
+            ->setDescription('Migrate database.')
+            ->addArgument('to-version', InputArgument::OPTIONAL, 'Migrate to specific version of migrations');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->prepareMigrationDirectory();
 
-        $migration = new Migration($this->getContainer());
+        $migration = $this->getContainer()->get('migration');
         $damiStatusCommand = new DamiMigrateCommand($this->getName(), $migration);
         $damiStatusCommand->execute($input, $output);
     }
