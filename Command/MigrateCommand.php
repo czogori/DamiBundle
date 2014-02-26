@@ -28,7 +28,7 @@ class MigrateCommand extends AbstractCommand
     {
         $this->prepareMigrationDirectory();
 
-        $migration = $this->getContainer()->get('migration');
+        $migration = $this->getContainer()->get('dami.migration');
         $damiStatusCommand = new DamiMigrateCommand($this->getName(), $migration);
         $damiStatusCommand->execute($input, $output);
     }

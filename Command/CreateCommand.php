@@ -36,7 +36,7 @@ class CreateCommand extends AbstractCommand
                 if (file_exists($bundleMigrationDirectory)) {
                     $filenameBuilder = new FileNameBuilder($migrationName);
                     $fileSystem = new Filesystem();
-                    $templateRenderer = $this->getContainer()->get('template_renderer');
+                    $templateRenderer = $this->getContainer()->get('dami.template_renderer');
                     try {
                         $fileName = $filenameBuilder->build();
                         $path = $bundleMigrationDirectory . '/' . $fileName;
@@ -52,7 +52,7 @@ class CreateCommand extends AbstractCommand
                 break;
             }
         }
-        if(false === $budleExists) {
+        if (false === $budleExists) {
             $output->writeln(sprintf('<comment>Bundle %s does not exist.</comment>', $bundleName));
         }
     }

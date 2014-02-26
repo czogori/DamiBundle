@@ -19,8 +19,7 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
-        $container->setParameter('migrations_directory', $config['migrations_directory']);
+        $container->setParameter('dami.migrations_directory', $config['migrations_directory']);
     }
 
     /**
