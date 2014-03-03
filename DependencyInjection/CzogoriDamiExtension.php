@@ -39,8 +39,5 @@ class CzogoriDamiExtension extends Extension implements PrependExtensionInterfac
                 $container->prependExtensionConfig('rentgen', $connectionConfig);
             }
         }
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, array());
-        $container->prependExtensionConfig('dami', array('migrations_directory' => $config['migrations_directory']));
     }
 }
