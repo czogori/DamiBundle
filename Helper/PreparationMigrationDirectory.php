@@ -26,16 +26,13 @@ class PreparationMigrationDirectory
 
     /**
      * Prepare migration directory to use.
+     *
      * @return void
      */
     public function prepare()
     {
         $migrationDirectory = $this->baseDirectory;
-        try {
-            $this->fileSystem->mkdir($migrationDirectory);
-        } catch (IOException $e) {
-            echo 'Nie można utworzyć katalogu ' . $migrationDirectory;
-        }
+        $this->fileSystem->mkdir($migrationDirectory);
 
         foreach ($this->bundles as $bundle) {
             $bundleMigrationDirectory = $bundle->getPath() . '/Resources/migrations';

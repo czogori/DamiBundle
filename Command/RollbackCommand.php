@@ -26,10 +26,14 @@ class RollbackCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->prepareMigrationDirectory();
+        try {
+            $this->prepareMigrationDirectory();
 
-        $migration = $this->getContainer()->get('dami.migration');
-        $damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
-        $damiStatusCommand->execute($input, $output);
+            $migration = $this->getContainer()->get('dami.migration');
+            $damiStatusCommand = new DamiRollbackCommand($this->getName(), $migration);
+            $damiStatusCommand->execute($input, $output);
+        } catch (\Exception $e) {
+            $output->writeln(sprintf("<error>%s</error>", $e->getMessage()));
+        }
     }
 }

@@ -18,10 +18,14 @@ class StatusCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->prepareMigrationDirectory();
+        try {
+            $this->prepareMigrationDirectory();
 
-        $damiStatusCommand = new DamiStatusCommand($this->getName(), $this->getContainer());
-        $damiStatusCommand->setApplication($this->getApplication());
-        $damiStatusCommand->execute($input, $output);
+            $damiStatusCommand = new DamiStatusCommand($this->getName(), $this->getContainer());
+            $damiStatusCommand->setApplication($this->getApplication());
+            $damiStatusCommand->execute($input, $output);
+        } catch (\Exception $e) {
+            $output->writeln(sprintf("<error>%s</error>", $e->getMessage()));
+        }
     }
 }
