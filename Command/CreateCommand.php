@@ -33,20 +33,32 @@ class CreateCommand extends AbstractCommand
         foreach ($kernel->getBundles() as $bundle) {
             if ($bundle->getName() === $bundleName) {
                 $bundleMigrationDirectory = $bundle->getPath() . '/Resources/migrations';
-                if (file_exists($bundleMigrationDirectory)) {
-                    $filenameBuilder = new FileNameBuilder($migrationName);
-                    $fileSystem = new Filesystem();
-                    $templateRenderer = $this->getContainer()->get('dami.template_renderer');
-                    try {
-                        $fileName = $filenameBuilder->build();
-                        $path = $bundleMigrationDirectory . '/' . $fileName;
-                        $fileSystem->dumpFile($path, $templateRenderer->render($migrationName));
+                $fileSystem = new Filesystem();
+                if (!file_exists($bundleMigrationDirectory)) {
+                    $output->writeln('<error>Directory of migrations does not exist.</error>');
 
-                        $output->writeln('<info>Migration has been created.</info>');
-                        $output->writeln(sprintf('<comment>Location: %s</comment>', $path));
-                    } catch (\Exception $e) {
-                        $output->writeln(sprintf("<error>Something went wrong.</error>\n\n%s", $e->getMessage()));
+                    $dialog = $this->getHelperSet()->get('dialog');
+                    if(!$dialog->askConfirmation(
+                        $output,
+                        sprintf('<question>Do you want to create %s directory? (y/n)</question>', $bundleMigrationDirectory),
+                        false)) {
+                            return;
                     }
+                    $fileSystem->mkdir($bundleMigrationDirectory);
+                    $output->writeln('<info>Directory of migrations has been created.</info>');
+                    $output->writeln(sprintf('<comment>Location: %s</comment>', $bundleMigrationDirectory));
+                }
+                $filenameBuilder = new FileNameBuilder($migrationName);
+                $templateRenderer = $this->getContainer()->get('dami.template_renderer');
+                try {
+                    $fileName = $filenameBuilder->build();
+                    $path = $bundleMigrationDirectory . '/' . $fileName;
+                    $fileSystem->dumpFile($path, $templateRenderer->render($migrationName));
+
+                    $output->writeln('<info>Migration has been created.</info>');
+                    $output->writeln(sprintf('<comment>Location: %s</comment>', $path));
+                } catch (\Exception $e) {
+                    $output->writeln(sprintf("<error>Something went wrong.</error>\n\n%s", $e->getMessage()));
                 }
                 $budleExists = true;
                 break;
