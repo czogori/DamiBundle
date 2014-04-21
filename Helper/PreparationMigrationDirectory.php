@@ -31,6 +31,9 @@ class PreparationMigrationDirectory
     public function prepare()
     {
         $migrationDirectory = $this->baseDirectory;
+        if ($this->fileSystem->exists($migrationDirectory)) {
+            $this->fileSystem->remove(array($migrationDirectory));
+        }
         $this->fileSystem->mkdir($migrationDirectory);
 
         foreach ($this->bundles as $bundle) {
