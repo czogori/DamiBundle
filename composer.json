@@ -2,9 +2,9 @@
     "name": "czogori/dami-bundle",
     "description": "Dami bundle",
     "keywords": [ "dami" ],
-    "license": "MIT",    
+    "license": "MIT",
     "type": "symfony-bundle",
-    "require": {        
+    "require": {
         "czogori/dami": "dev-master"
     },
     "authors": [
@@ -12,12 +12,12 @@
             "name": "Arek Jaskólski",
             "email": "arek.jaskolski@gmail.com"
         }
-    ],    
+    ],
     "autoload": {
         "psr-0": {
             "Czogori\\DamiBundle": ""
         }
     },
     "target-dir": "Czogori/DamiBundle",
-    "minimum-stability": "dev"    
+    "minimum-stability": "dev"
 }
