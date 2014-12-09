@@ -14,8 +14,8 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Czogori\\DamiBundle": ""
+        "psr-4": {
+            "Czogori\\DamiBundle\\": ""
         }
     },
     "minimum-stability": "dev"
