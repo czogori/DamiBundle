@@ -30,7 +30,7 @@ class MigrateCommand extends AbstractCommand
             $this->prepareMigrationDirectory();
 
             $migration = $this->getContainer()->get('dami.migration');
-            $damiStatusCommand = new DamiMigrateCommand($this->getName(), $migration);
+            $damiStatusCommand = new DamiMigrateCommand($this->getName(), $this->getContainer());
             $damiStatusCommand->execute($input, $output);
         } catch (\Exception $e) {
             $output->writeln(sprintf("<error>%s</error>", $e->getMessage()));
