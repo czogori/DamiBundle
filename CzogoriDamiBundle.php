@@ -7,11 +7,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Dami\DependencyInjection\DamiExtension;
 use Rentgen\DependencyInjection\RentgenExtension;
+use Czogori\DamiBundle\DependencyInjection\Compiler\ConnectionPass;
 
 class CzogoriDamiBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
+
         parent::build($container);
 
         $rentgenExtension = new RentgenExtension();
@@ -21,5 +23,7 @@ class CzogoriDamiBundle extends Bundle
         $damiExtension = new DamiExtension();
         $container->registerExtension($damiExtension);
         $container->loadFromExtension($damiExtension->getAlias());
+
+        $container->addCompilerPass(new ConnectionPass());
     }
 }
