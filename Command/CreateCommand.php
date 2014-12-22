@@ -40,8 +40,8 @@ class CreateCommand extends AbstractCommand
                     $dialog = $this->getHelperSet()->get('dialog');
                     if(!$dialog->askConfirmation(
                         $output,
-                        sprintf('<question>Do you want to create %s directory? (y/n)</question>', $bundleMigrationDirectory),
-                        false)) {
+                        sprintf('<question>Do you want to create %s directory? (Y/n)</question>', $bundleMigrationDirectory),
+                        true)) {
                             return;
                     }
                     $fileSystem->mkdir($bundleMigrationDirectory);
