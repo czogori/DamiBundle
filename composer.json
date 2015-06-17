@@ -5,6 +5,7 @@
     "license": "MIT",
     "type": "symfony-bundle",
     "require": {
+        "php": ">=5.4",
         "czogori/dami": "dev-master"
     },
     "authors": [
