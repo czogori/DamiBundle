@@ -4,9 +4,9 @@ namespace Czogori\DamiBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Component\Config\FileLocator;
+
 class ConnectionPass implements CompilerPassInterface
 {
     /**
@@ -15,8 +15,7 @@ class ConnectionPass implements CompilerPassInterface
      * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
-    { 
-  
+    {
         $dir = __DIR__ . '/../../../../../app/config';
         $fileLocator = new FileLocator($dir);
         foreach(array('dev', 'prod', 'test') as $environment) {
