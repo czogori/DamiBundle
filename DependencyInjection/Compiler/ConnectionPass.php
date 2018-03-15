@@ -20,7 +20,7 @@ class ConnectionPass implements CompilerPassInterface
         $fileLocator = new FileLocator($dir);
         foreach(array('dev', 'prod', 'test') as $environment) {
             $configFile = $fileLocator->locate('config_' . $environment . '.yml');
-            $config = Yaml::parse($configFile);
+            $config = Yaml::parse(file_get_contents($configFile));
             if (isset($config['propel']['dbal'])) {
                 $connectionConfig[$environment] = $config['propel']['dbal'];
                 $connectionConfig[$environment]['adapter'] = $config['propel']['dbal']['driver'];
