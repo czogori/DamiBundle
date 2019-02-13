@@ -2,11 +2,11 @@
 
 namespace Czogori\DamiBundle\Command;
 
-use Symfony\Component\Console\Input\InputArgument,
-    Symfony\Component\Console\Input\InputInterface,
-    Symfony\Component\Console\Output\OutputInterface,
-    Symfony\Component\Filesystem\Filesystem;
-
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Dami\Migration\FileNameBuilder;
 
 class CreateCommand extends AbstractCommand
@@ -37,13 +37,12 @@ class CreateCommand extends AbstractCommand
                 if (!file_exists($bundleMigrationDirectory)) {
                     $output->writeln('<error>Directory of migrations does not exist.</error>');
 
-                    $dialog = $this->getHelperSet()->get('dialog');
-                    if(!$dialog->askConfirmation(
-                        $output,
-                        sprintf('<question>Do you want to create %s directory? (Y/n)</question>', $bundleMigrationDirectory),
-                        true)) {
-                            return;
+                    $helper = $this->getHelper('question');
+                    $question = new ConfirmationQuestion(sprintf('Do you want to create %s directory?', $bundleMigrationDirectory), false);
+                    if (!$helper->ask($input, $output, $question)) {
+                        return;
                     }
+
                     $fileSystem->mkdir($bundleMigrationDirectory);
                     $output->writeln('<info>Directory of migrations has been created.</info>');
                     $output->writeln(sprintf('<comment>Location: %s</comment>', $bundleMigrationDirectory));
